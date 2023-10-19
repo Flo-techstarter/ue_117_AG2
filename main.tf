@@ -7,7 +7,6 @@ locals {
   cidr_a = "10.0.1.0/24"
   cidr_b = "10.0.2.0/24"
   cidr_c = "10.0.3.0/24"
-  cidr_d = "10.0.4.0/24"
 }
 
 
@@ -16,7 +15,7 @@ resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "TF VPC 2"
+    Name = "TF VPC"
   }
 }
 
@@ -29,7 +28,7 @@ resource "aws_subnet" "subnet_a" {
   map_public_ip_on_launch = true # Wir wollen, dass die Instanzen eine öffentliche IP bekommen
 
   tags = {
-    Name = "TF Subnet A 2"
+    Name = "TF Subnet A"
   }
 }
 
@@ -40,7 +39,7 @@ resource "aws_subnet" "subnet_b" {
   map_public_ip_on_launch = true # Wir wollen, dass die Instanzen eine öffentliche IP bekommen
 
   tags = {
-    Name = "TF Subnet B 2"
+    Name = "TF Subnet B"
   }
 }
 
@@ -52,7 +51,7 @@ resource "aws_subnet" "subnet_c" {
   map_public_ip_on_launch = true # Wir wollen, dass die Instanzen eine öffentliche IP bekommen
 
   tags = {
-    Name = "TF Subnet C 2"
+    Name = "TF Subnet C"
   }
 }
 
@@ -62,7 +61,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "TF Internet Gateway 2"
+    Name = "TF Internet Gateway"
   }
 }
 
@@ -77,7 +76,7 @@ resource "aws_route_table" "rt" {
   }
 
   tags = {
-    Name = "TF Route Table 2"
+    Name = "TF Route Table"
   }
 }
 
@@ -104,7 +103,7 @@ resource "aws_route_table_association" "C" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 resource "aws_security_group" "sg" {
-  name = "tf_sg2"
+  name = "tf_sg"
   description = "Allow SSH inbound traffic"
   vpc_id = aws_vpc.main.id
 
@@ -126,7 +125,7 @@ resource "aws_security_group" "sg" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
-resource "aws_instance" "test2" {
+resource "aws_instance" "test" {
   ami           = "ami-065ab11fbd3d0323d"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_a.id
@@ -134,7 +133,7 @@ resource "aws_instance" "test2" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
-resource "aws_instance" "test2_2" {
+resource "aws_instance" "test2" {
   ami           = "ami-065ab11fbd3d0323d"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_b.id
@@ -142,7 +141,7 @@ resource "aws_instance" "test2_2" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
-resource "aws_instance" "test2_3" {
+resource "aws_instance" "test3" {
   ami           = "ami-065ab11fbd3d0323d"
   instance_type = "t2.micro"
   subnet_id = aws_subnet.subnet_c.id
